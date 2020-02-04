@@ -1,6 +1,7 @@
 package com.example.java;
 
 import java.io.*;
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -55,6 +56,8 @@ public class TrainAdventureTest {
                 // while next station is not 0 which is start station, then we can keep going to next
                 // if the next station is 0, which means this path is already finished
                 while(next != 0) {
+                    // create a array list which can contain repeated station numbers
+                    ArrayList<Integer> repeated = new ArrayList<>(possible);
                     // go to next station
                     next = station[next];
                     // store the station number
@@ -62,6 +65,7 @@ public class TrainAdventureTest {
                     // which could be taken as the beginning station.
                     // and the path has no more than 1 odd station
                     possible.add(next);
+                    repeated.add(next);
                     // if there is a odd station
                     if (next % 2 != 0){
                         // count++
@@ -73,6 +77,10 @@ public class TrainAdventureTest {
                             // if count > 1, then break the loop, which means this path is already finished
                             break;
                         }
+                    }
+                    // if the repeated array list's length is longer than possible set, then break the the loop
+                    if (repeated.size() > possible.size()) {
+                        break;
                     }
                 }
             }
